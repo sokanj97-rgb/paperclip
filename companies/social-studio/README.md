@@ -56,6 +56,27 @@ All times are in `America/New_York`. To change them, edit `.paperclip.yaml` befo
 
 Starter tasks: **Brand intake and Content OS setup**, **Content OS baseline** (first 30+ teardowns, playbook v0, 4-week calendar) and **Channel setup** (access, profile audit, community guide).
 
+## Runs on your Claude subscription
+
+Both agents use the `claude_local` adapter (Claude Code CLI). With no API key set, Paperclip bills their runs to your Claude Pro/Max subscription instead of API credits.
+
+| Agent | Model | Why |
+| --- | --- | --- |
+| Creative Director | `opus` | Research, judgment and the quality gate; runs about 4× a week |
+| Social Media Manager | `sonnet` | Production, publishing and replies; runs 3× a day, so a lighter model saves your usage limits |
+
+`opus` and `sonnet` are Claude CLI aliases that always point to the latest model your plan includes.
+
+Setup, on the machine that runs Paperclip:
+
+1. Install Claude Code and run `claude login` with your Claude subscription account.
+2. Make sure `ANTHROPIC_API_KEY` is **not** set in the environment Paperclip starts from, and not in the agents' env in Paperclip. If it's set, it takes priority and runs bill as API usage. Paperclip passes the server's environment through to the agents.
+3. After importing, the agent's page in Paperclip should show "Claude is logged in via claude.ai" with your plan's usage windows.
+
+Agent runs count toward your plan's usage limits. If you hit them, runs pause until the window resets. Scheduled routines coalesce, so nothing piles up.
+
+Your Claude subscription does not pay for video/image generation (e.g. Higgsfield credits) or other paid APIs.
+
 ## Integrations (all optional)
 
 | Env input | Used for |

@@ -1,6 +1,10 @@
 schema: paperclip/v1
 agents:
   creative-director:
+    adapter:
+      type: claude_local
+      config:
+        model: opus
     inputs:
       env:
         INSTAGRAM_ACCESS_TOKEN:
@@ -10,6 +14,10 @@ agents:
           kind: plain
           requirement: optional
   social-media-manager:
+    adapter:
+      type: claude_local
+      config:
+        model: sonnet
     inputs:
       env:
         INSTAGRAM_ACCESS_TOKEN:
