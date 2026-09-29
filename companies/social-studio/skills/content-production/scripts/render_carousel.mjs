@@ -19,6 +19,7 @@
 //     { "kind": "cta",     "title": "Want us to check yours?", "body": "Comment AUDIT and we'll send a free teardown" }
 //   ]
 // }
+import { execSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -42,13 +43,24 @@ async function loadFontBytes() {
 // Embedded as a data URL: pages loaded via setContent cannot fetch file:// fonts.
 const fontUrl = `data:font/ttf;base64,${(await loadFontBytes()).toString("base64")}`;
 
-let chromium;
-try {
-  ({ chromium } = await import("playwright"));
-} catch {
+// Resolve Playwright from a local install first, then from the global npm root
+// (`npm i -g playwright`), since ESM imports don't search global modules.
+async function loadPlaywright() {
+  try {
+    return await import("playwright");
+  } catch {}
+  try {
+    const globalRoot = execSync("npm root -g", { encoding: "utf8" }).trim();
+    return await import(pathToFileURL(path.join(globalRoot, "playwright", "index.mjs")).href);
+  } catch {}
+  return null;
+}
+const playwright = await loadPlaywright();
+if (!playwright) {
   console.error("Playwright is not installed. Run: npm i -g playwright && npx playwright install chromium");
   process.exit(2);
 }
+const { chromium } = playwright;
 
 const [specPath, outDir] = process.argv.slice(2);
 if (!specPath || !outDir) {

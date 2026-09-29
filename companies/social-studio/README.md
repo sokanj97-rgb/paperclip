@@ -103,8 +103,12 @@ Without these, the team runs in **manual hand-off** mode: at each slot you get a
 
 ## Getting started
 
+**Easiest:** give [LOCAL-SETUP.md](LOCAL-SETUP.md) to Claude Code on your computer. It installs the dependencies, connects your Claude subscription and Higgsfield, runs a smoke test, and imports the team.
+
+Manual import, from this fork's checkout:
+
 ```sh
-paperclipai company import ./companies/social-studio
+pnpm paperclipai company import ./companies/social-studio
 ```
 
 Then open the **Brand intake** task and answer the Creative Director's questionnaire.
