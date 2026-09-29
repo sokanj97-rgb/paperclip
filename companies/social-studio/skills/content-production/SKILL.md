@@ -52,7 +52,14 @@ last 3s CTA: one action, stated plainly; loop back to the start where possible
 
 **Formats needing the owner** (talking head, face-to-camera): write a tight script plus a shot list and put them in "Needs from owner". Owner filming is batched into one weekly ~20-minute session, so always ship a no-filming fallback too.
 
-**Tooling suggestions:** Playwright for captures and scroll recordings, ffmpeg for editing, captions, concatenation and loudness normalization (-14 LUFS), and any connected image, video or TTS tools. Keep project files and source assets attached to the issue so revisions are cheap.
+**Required pipeline (every video, no exceptions).** This is what produced the reference post, and it sets the craft floor:
+
+1. **Raw footage:** AI generation following [references/ai-video-recipe.md](references/ai-video-recipe.md) (model, settings, prompt template, budget), or a screen recording / owner clip.
+2. **Finish:** `python3 scripts/finish_video.py raw.mp4 captions.json out/`. It snaps captions to detected cuts, outputs 1080×1920 at 30fps, normalizes loudness to -14 LUFS and makes `cover.jpg`. Write `captions.json` with hand-placed line breaks (format in the script header).
+3. **QA:** `python3 scripts/qa_video.py out/final.mp4 --out out/qa/`. It must print `"result": "PASS"`. Then open `qa-sheet.jpg` and check hands, faces, screens and text yourself.
+4. Attach the final video, cover, `finish-report.json`, `qa-report.json` and `qa-sheet.jpg` to the issue.
+
+Don't hand-roll ffmpeg commands or caption layouts. If a script can't do something you need, note it on the issue so the script gets improved. Keep source files attached so revisions are cheap.
 
 **Sound:** voiceover or on-screen text must carry the post with sound off. Use trending audio only when it's licensed for business use on that platform (use the platform's commercial music library for business accounts).
 
@@ -69,7 +76,7 @@ Last-1    Summary or checklist (the "save this" slide)
 Last      CTA: save, share with someone who needs it, comment keyword, or DM
 ```
 
-Build slides as HTML/CSS using the brand-book fonts and colors, and render to PNG with a headless browser at exact size. Body text ≥ 28px equivalent, high contrast, consistent layout grid, and a slide counter or progress cue.
+Render with `node scripts/render_carousel.mjs slides.json out/`. It uses HTML/CSS with the brand font (Montserrat by default, downloaded once, or `BRAND_FONT=/path.ttf`) at exactly 1080×1350, puts brand colors and the handle in `brand`, and fails if copy overflows a slide or the font doesn't load. Wrap a word in `*asterisks*` in a title to highlight it in the accent color. Open every slide PNG before hand-off. Body text ≥ 28px equivalent, high contrast, consistent layout grid, and a slide counter or progress cue.
 
 ## 5. Stories (IG)
 
@@ -96,6 +103,9 @@ Voice: follow the brand book. By default: confident, plain-spoken, a little chee
 ## 8. Deliverables checklist (attach to the issue)
 
 - [ ] Final asset(s) at exact spec, plus a cover frame or thumbnail
+- [ ] Video: `qa-report.json` showing PASS, `qa-sheet.jpg` reviewed (note "frames checked: OK" or what you fixed), `finish-report.json`
+- [ ] Carousel: all slide PNGs from `render_carousel.mjs`, each opened and checked
+- [ ] Credits spent on generation (from the preflight), noted on the issue
 - [ ] Script or slide copy (text)
 - [ ] IG caption, TikTok caption
 - [ ] Keywords, 3–5 hashtags per platform, alt text

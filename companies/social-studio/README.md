@@ -77,6 +77,21 @@ Agent runs count toward your plan's usage limits. If you hit them, runs pause un
 
 Your Claude subscription does not pay for video/image generation (e.g. Higgsfield credits) or other paid APIs.
 
+## Production requirements (for test-post quality)
+
+The Social Media Manager makes every video and carousel with the scripts in `skills/content-production/scripts/`. They encode the craft floor set by the reference post in `references/test-post-food-tracker/`, and the Creative Director's quality gate rejects anything that skipped them. Install these on the machine that runs Paperclip:
+
+| Requirement | Why | Check |
+| --- | --- | --- |
+| **ffmpeg** (with libx264) | Captions, 1080×1920 export, -14 LUFS loudness, cut detection, QA | `ffmpeg -version` |
+| **Python 3 + Pillow** | Caption overlays, QA reports | `python3 -c "import PIL"` |
+| **Node 18+ + Playwright Chromium** | Carousels, website scroll recordings | `npx playwright install chromium` |
+| **Higgsfield MCP server** in Claude Code (user scope) | AI video generation (Kling 3.0 by default, about 30 credits per 15s clip) | `claude mcp list` shows higgsfield |
+
+To add Higgsfield: run `claude mcp add --scope user --transport http higgsfield <server URL from Higgsfield's MCP docs>`, then open `claude` once and run `/mcp` to sign in. Agents run headless and can't complete a sign-in themselves. Generation spends **Higgsfield credits**, not your Claude subscription. The default budget is 150 credits/week with a 60-credit cap per post; change it in the brand book.
+
+Without Higgsfield the team still ships, using no-AI formats: website scroll teardowns, before/afters and carousels. The **Channel Setup** task runs a toolchain check and a smoke test on day one and sends you one install checklist for anything missing.
+
 ## Integrations (all optional)
 
 | Env input | Used for |

@@ -202,8 +202,11 @@ function shouldIncludePortableFile(filePath: string): boolean {
   const baseName = path.basename(filePath);
   const isMarkdown = baseName.endsWith(".md");
   const isPaperclipYaml = baseName === ".paperclip.yaml" || baseName === ".paperclip.yml";
+  // Skill packages may ship scripts/references alongside SKILL.md; keep them,
+  // matching the server's GitHub import which includes everything under skills/.
+  const isSkillFile = filePath.replace(/\\/g, "/").startsWith("skills/");
   const contentType = binaryContentTypeByExtension[path.extname(baseName).toLowerCase()];
-  return isMarkdown || isPaperclipYaml || Boolean(contentType);
+  return isMarkdown || isPaperclipYaml || isSkillFile || Boolean(contentType);
 }
 
 function findPortableExtensionPath(files: Record<string, CompanyPortabilityFileEntry>): string | null {

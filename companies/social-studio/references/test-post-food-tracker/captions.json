@@ -1,0 +1,6 @@
+{"cover_at": 8.6, "segments": [
+ {"start": 0, "end": 3, "lines": [{"text": "Logging lunch", "size": 84}, {"text": "took me 3 seconds", "size": 84}]},
+ {"start": 3, "end": 7, "lines": [{"text": "Snap a photo →", "size": 72}, {"text": "it's logged", "size": 72}]},
+ {"start": 7, "end": 11, "lines": [{"text": "Protein goal:", "size": 72}, {"text": "hit by lunch", "size": 72, "color": "accent"}]},
+ {"start": 11, "end": 15, "lines": [{"text": "Tracking that doesn't", "size": 68}, {"text": "feel like homework", "size": 68}, {"text": "Save this for your next reset", "size": 42, "color": "accent"}]}
+]}

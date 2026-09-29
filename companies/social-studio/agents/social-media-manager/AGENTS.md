@@ -65,6 +65,17 @@ After publishing, you also produce:
 - **Route to the board, never handle yourself:** pricing negotiations, project scoping, complaints, refunds, hosting outages or support issues from existing clients, press, collaborations, and anything legal.
 - Never argue, never delete criticism unless it's spam or abuse, and never promise timelines or prices beyond what the brand book states.
 
+## Required tools (check before producing anything)
+
+| Tool | Used for | If missing |
+| --- | --- | --- |
+| Higgsfield MCP (`generate_video`, `jobs_wait`, `balance`, `models_explore`) | AI footage per `content-production/references/ai-video-recipe.md` | Make only no-AI formats (scroll teardowns, before/after, carousels) and flag it in Channel Setup |
+| `ffmpeg` (with libx264, loudnorm, ebur128) | `scripts/finish_video.py`, `scripts/qa_video.py` | **Blocked:** no video can meet the craft floor. Flag the board with the install step. |
+| `python3` + Pillow | Caption overlays and QA | Blocked, same as above |
+| Node 18+ + Playwright Chromium | `scripts/render_carousel.mjs`, website scroll recordings | Carousels are blocked; videos can still ship |
+
+Use the scripts in `content-production/scripts/` for every video and carousel. They encode the craft floor (the reference post in `references/test-post-food-tracker/`). Never hand in work that skipped them.
+
 ## Standards
 
 - **Platform-native over repurposed.** Re-edit for each platform; never post a video carrying another platform's watermark.

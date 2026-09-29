@@ -24,6 +24,19 @@ The bar is "would this stop a busy small-business owner mid-scroll and make them
 
 **Pass:** total ≥ 40/50, no dimension below 3, **Hook ≥ 4**, and every compliance check below passes.
 
+## 1b. Craft floor (checked before scoring; any miss = automatic revise)
+
+The benchmark is the reference post in `references/test-post-food-tracker/` at the package root. Nothing ships below it.
+
+- [ ] **Video:** `qa-report.json` attached with `"result": "PASS"` (1080×1920, 30fps, H.264, -14 LUFS ±1.5, audio present, no shot longer than 5s)
+- [ ] **Video:** `qa-sheet.jpg` attached, and you've looked at it yourself: no warped hands, faces or garbled screen text
+- [ ] **Video:** captions came from `finish_video.py`, with hand-placed line breaks, no orphan words, and changes that land on cuts
+- [ ] **Carousel:** slides came from `render_carousel.mjs` at 1080×1350 with the brand font; open every slide
+- [ ] Cover frame attached, and the hook is readable at thumbnail size
+- [ ] Generation credits noted, and within the brief's budget
+
+Aim to beat the benchmark, not just match it: a sharper hook, real product footage instead of generic AI footage, and a clearer payoff. When a post clearly beats the reference, say why in the scorecard so the playbook can capture it.
+
 ## 2. Compliance checks (any fail = automatic revise)
 
 - [ ] Every fact, stat and result is sourced or verified in the brand book
