@@ -83,7 +83,17 @@ Lightweight and frequent: a poll or quiz tied to this week's topic, a behind-the
 
 Voice: follow the brand book. By default: confident, plain-spoken, a little cheeky, zero jargon without a translation, never salesy.
 
-## 7. Deliverables checklist (attach to the issue)
+## 7. Production notes (learned from test runs)
+
+- **Never let the video model render words.** Prompt for "no readable text, no captions, no logos" and add all on-screen text in post-production. AI models garble text on phone screens and signs.
+- **Time captions to the real cuts,** not the brief's planned beats. Run ffmpeg scene detection (`select='gt(scene,0.25)',showinfo`) and change captions on the detected cut times.
+- **Break caption lines by hand** into natural phrases. Auto-wrap leaves orphan words, and font widths vary (Montserrat runs wider than Inter). Shrink the font rather than exceed the safe width (~860px on a 1080px frame).
+- **Normalize loudness.** Generated audio often comes out very quiet (about -35 dB). Normalize to about -14 LUFS.
+- **Check the price before generating and start cheap.** Use a low-cost model or draft mode for first cuts, and re-render at 1080p only after approval. Some draft modes need a higher plan tier, so check before assuming.
+- **Look at frames before hand-off.** Sample at least the opening frame, a face frame and a hands-on-device frame, and check hands, faces and screen content for AI artifacts.
+- **Realistic AI people** always get the platform's AI-generated content label, and the approval packet notes it.
+
+## 8. Deliverables checklist (attach to the issue)
 
 - [ ] Final asset(s) at exact spec, plus a cover frame or thumbnail
 - [ ] Script or slide copy (text)
