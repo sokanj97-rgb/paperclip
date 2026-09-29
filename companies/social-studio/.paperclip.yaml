@@ -1,0 +1,61 @@
+schema: paperclip/v1
+agents:
+  creative-director:
+    inputs:
+      env:
+        INSTAGRAM_ACCESS_TOKEN:
+          kind: secret
+          requirement: optional
+        INSTAGRAM_BUSINESS_ACCOUNT_ID:
+          kind: plain
+          requirement: optional
+  social-media-manager:
+    inputs:
+      env:
+        INSTAGRAM_ACCESS_TOKEN:
+          kind: secret
+          requirement: optional
+        INSTAGRAM_BUSINESS_ACCOUNT_ID:
+          kind: plain
+          requirement: optional
+        TIKTOK_ACCESS_TOKEN:
+          kind: secret
+          requirement: optional
+routines:
+  weekly-strategy-sprint:
+    triggers:
+      - kind: schedule
+        label: Monday morning
+        cronExpression: "5 7 * * 1"
+        timezone: America/New_York
+  weekly-production:
+    triggers:
+      - kind: schedule
+        label: Tuesday morning
+        cronExpression: "10 7 * * 2"
+        timezone: America/New_York
+  weekly-review-and-approval:
+    triggers:
+      - kind: schedule
+        label: Thursday morning
+        cronExpression: "10 7 * * 4"
+        timezone: America/New_York
+  daily-publish-and-engage:
+    concurrencyPolicy: skip_if_active
+    triggers:
+      - kind: schedule
+        label: Morning, midday and evening publish windows
+        cronExpression: "55 8,11,17 * * *"
+        timezone: America/New_York
+  weekly-performance-review:
+    triggers:
+      - kind: schedule
+        label: Sunday evening
+        cronExpression: "5 18 * * 0"
+        timezone: America/New_York
+  monthly-deep-study:
+    triggers:
+      - kind: schedule
+        label: First of the month
+        cronExpression: "5 6 1 * *"
+        timezone: America/New_York
