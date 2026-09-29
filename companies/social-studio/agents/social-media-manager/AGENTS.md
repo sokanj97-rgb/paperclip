@@ -3,7 +3,6 @@ name: Social Media Manager
 title: Social Media Manager & Content Producer
 reportsTo: creative-director
 skills:
-  - paperclip
   - content-production
   - social-publishing
   - performance-learning

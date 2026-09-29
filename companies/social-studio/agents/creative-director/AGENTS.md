@@ -3,7 +3,6 @@ name: Creative Director
 title: Creative Director & Head of Social
 reportsTo: null
 skills:
-  - paperclip
   - content-research
   - quality-gate
   - performance-learning

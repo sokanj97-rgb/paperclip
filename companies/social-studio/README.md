@@ -25,8 +25,8 @@ The team studies top-performing content, turns what it learns into posts, checks
 
 | Agent | Title | Reports to | Skills |
 | --- | --- | --- | --- |
-| `creative-director` | Creative Director & Head of Social | — (you, the board) | paperclip, content-research, quality-gate, performance-learning |
-| `social-media-manager` | Social Media Manager & Content Producer | creative-director | paperclip, content-production, social-publishing, performance-learning |
+| `creative-director` | Creative Director & Head of Social | — (you, the board) | content-research, quality-gate, performance-learning |
+| `social-media-manager` | Social Media Manager & Content Producer | creative-director | content-production, social-publishing, performance-learning |
 
 **Creative Director:** owns brand, strategy, research, briefs, the quality gate, the weekly approval packet and the learning playbook.
 
